@@ -2,39 +2,70 @@ import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
-import hash from '../utilities/hash'
+import { SpotifyObj, User, ImageItem } from '../types'
+import {getTokenFromUrl} from '../utilities'
+import SpotifyWebApi from 'spotify-web-api-js'
 
 const inter = Inter({ subsets: ['latin'] })
-const authEndpoint = "https://accounts.spotify.com/authorize"
 
-interface Token {
-  access_key: string
-}
+const authEndpoint = "https://accounts.spotify.com/authorize"
+const redirectUri = "http://localhost:3000/"
+const clientId = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID
+const scopes = [
+  "user-read-playback-state",
+  "user-modify-playback-state",
+  "playlist-read-private",
+  "user-follow-modify",
+  "playlist-read-collaborative",
+  "user-follow-read",
+  "user-read-currently-playing",
+  "user-read-playback-position",
+  "user-library-modify",
+  "playlist-modify-public",
+  "user-read-email",
+  "user-top-read",
+  "user-read-recently-played",
+  "user-read-private",
+  "user-library-read"
+]
+const spotify = new SpotifyWebApi()
 
 export default function Home() {
-  const [state, setState] = useState({
-    token: null,
-    item: {
-      album: {
-        images: [{ url: "" }]
-      },
-      name: "",
-      artists: [{ name: "" }],
-      duration_ms: 0
-    },
-    is_playing: "Paused",
-    progress_ms: 0,
-    no_data: false
-  })
+  const loginUrl = `${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join("%20")}&response_type=token&show_dialogue=true`
+  const [spotifyToken, setSpotifyToken] = useState("")
+  const [user, setUser] = useState<User>({})
 
   useEffect(() => {
-    // let token:<string> = 'hash.access_key';
+    console.log("1. This is what is derived from the URL: ", getTokenFromUrl());
+    const _spotifyObject: SpotifyObj = getTokenFromUrl();
+    window.location.hash = "";
+    console.log("2. This is the returned spotifyObject:", _spotifyObject);
+
+    if (_spotifyObject.access_token) {
+      setSpotifyToken(_spotifyObject.access_token)
+
+      spotify.setAccessToken(_spotifyObject.access_token)
+
+      spotify.getMe().then((user) => {
+        console.log("3. This youu:", user)
+        const userData: User = user
+        setUser(userData)
+      })
+    }
 
   }, [])
 
-  const spotifyLogin = () => {
-    // console.log(hash);
-    console.log(process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID);
+  useEffect(() => {
+    console.log('user ifno:', user);
+    
+  }, [user])
+
+  const getInfo = () => {
+    spotify.getMyTopArtists().then((data) => {
+      console.log(data);
+      
+    })
+    // console.log(loginUrl);
   }
 
   return (
@@ -47,13 +78,26 @@ export default function Home() {
       </Head>
       <div className="flex flex-col justify-center items-center">
         Hello Spotify world
-
+        {user && (
+          <>
+            <p>{user.country}</p>
+            {user?.images && (
+              <Image width={10} height={10} src={"https://i.scdn.co/image/ab6775700000ee855b2a089e5eaf309a133f8cd6"} alt="profile pic"/>
+            )}
+          </>
+        )}
         <button
           className="w-1/12 bg-slate-700 text-green-600 rounded-full p-3 font-bold hover:text-slate-700 hover:bg-slate-200"
-          onClick={spotifyLogin}
+          onClick={getInfo}
         >
-          Login
+          Get Info
         </button>
+        <a
+          href={loginUrl}
+          className="w-1/12 bg-slate-700 text-green-600 rounded-full p-3 font-bold hover:text-slate-700 hover:bg-slate-200"
+        >
+          Login real
+        </a>
       </div>
     </>
   )
