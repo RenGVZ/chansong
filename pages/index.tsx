@@ -1,10 +1,42 @@
+import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
+import hash from '../utilities/hash'
 
 const inter = Inter({ subsets: ['latin'] })
+const authEndpoint = "https://accounts.spotify.com/authorize"
+
+interface Token {
+  access_key: string
+}
 
 export default function Home() {
+  const [state, setState] = useState({
+    token: null,
+    item: {
+      album: {
+        images: [{ url: "" }]
+      },
+      name: "",
+      artists: [{ name: "" }],
+      duration_ms: 0
+    },
+    is_playing: "Paused",
+    progress_ms: 0,
+    no_data: false
+  })
+
+  useEffect(() => {
+    // let token:<string> = 'hash.access_key';
+
+  }, [])
+
+  const spotifyLogin = () => {
+    // console.log(hash);
+    console.log(process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID);
+  }
+
   return (
     <>
       <Head>
@@ -13,8 +45,15 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div>
-        Hello world
+      <div className="flex flex-col justify-center items-center">
+        Hello Spotify world
+
+        <button
+          className="w-1/12 bg-slate-700 text-green-600 rounded-full p-3 font-bold hover:text-slate-700 hover:bg-slate-200"
+          onClick={spotifyLogin}
+        >
+          Login
+        </button>
       </div>
     </>
   )
