@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link'
 import { Inter } from '@next/font/google'
 import { SpotifyObj, User, ImageItem } from '../types'
 import {getTokenFromUrl} from '../utilities'
@@ -98,6 +99,7 @@ export default function Home() {
         >
           Login real
         </a>
+        <Link href="/artist">Go to artist page</Link>
       </div>
     </>
   )
