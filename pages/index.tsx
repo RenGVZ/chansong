@@ -4,37 +4,23 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Inter } from '@next/font/google'
 import { SpotifyObj, User, ImageItem } from '../types'
-import {getTokenFromUrl} from '../utilities'
+import { getTokenFromUrl, scopes } from '../utilities'
 import SpotifyWebApi from 'spotify-web-api-js'
+import { useUserContext } from '../context/UserContext'
 
 const inter = Inter({ subsets: ['latin'] })
 
 const authEndpoint = "https://accounts.spotify.com/authorize"
 const redirectUri = "http://localhost:3000/"
 const clientId = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID
-const scopes = [
-  "user-read-playback-state",
-  "user-modify-playback-state",
-  "playlist-read-private",
-  "user-follow-modify",
-  "playlist-read-collaborative",
-  "user-follow-read",
-  "user-read-currently-playing",
-  "user-read-playback-position",
-  "user-library-modify",
-  "playlist-modify-public",
-  "user-read-email",
-  "user-top-read",
-  "user-read-recently-played",
-  "user-read-private",
-  "user-library-read"
-]
 const spotify = new SpotifyWebApi()
 
 export default function Home() {
   const loginUrl = `${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join("%20")}&response_type=token&show_dialogue=true`
   const [spotifyToken, setSpotifyToken] = useState("")
   const [user, setUser] = useState<User>({})
+  
+  // const { user } = useUserContext()
 
   useEffect(() => {
     console.log("1. This is what is derived from the URL: ", getTokenFromUrl());
