@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
 import { getTokenFromUrl, scopes } from '../utilities'
-import { SpotifyObj, User, SpotifyUserContent } from '../types'
+import { SpotifyObj, User, SpotifyUserContent, ChildrenProps } from '../types'
 import SpotifyWebApi from 'spotify-web-api-js'
 
 const spotify = new SpotifyWebApi()
@@ -14,11 +14,7 @@ export const UserContext = createContext<SpotifyUserContent>({
   getTopArtists: () => { }
 })
 
-type Props = {
-  children?: React.ReactNode
-}
-
-export const UserContextProvider = ({ children }: Props) => {
+export const UserContextProvider = ({ children }: ChildrenProps) => {
   const [user, setUser] = useState<User>({})
   const [spotifyToken, setSpotifyToken] = useState<string>("")
 

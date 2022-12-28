@@ -2,6 +2,10 @@ export interface SpotifyObj {
   access_token?: string
 }
 
+export type ChildrenProps = {
+  children?: React.ReactNode
+}
+
 export type SpotifyUserContent = {
   user: User,
   setUser: (u: User) => void,
