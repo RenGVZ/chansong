@@ -2,6 +2,14 @@ export interface SpotifyObj {
   access_token?: string
 }
 
+export type SpotifyUserContent = {
+  user: User,
+  setUser: (u: User) => void,
+  spotifyToken: string,
+  setSpotifyToken: (t: string) => void,
+  getTopArtists: () => void
+}
+
 export interface User {
   country?: string,
   display_name?: string,
