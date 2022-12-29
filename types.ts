@@ -11,8 +11,12 @@ export type SpotifyUserContent = {
   setUser: (u: User) => void,
   spotifyToken: string,
   setSpotifyToken: (t: string) => void,
+  isLoggedIn: boolean,
   getTopArtists: () => void,
-  isLoggedIn: boolean
+
+  savedTracks: SavedTracks,
+  setSavedTracks: (s: SavedTracks) => void,
+  getSavedTracks: () => void,
 }
 
 export interface User {
@@ -21,6 +25,18 @@ export interface User {
   email?: string,
   href?: string,
   images?: ImageItem[]
+}
+
+export interface SavedTracks {
+  track?: {
+    name?: string,
+    album?: {
+      name?: string,
+      artists?: {
+        name?: string
+      }[]
+    }
+  }
 }
 
 export interface ImageItem {

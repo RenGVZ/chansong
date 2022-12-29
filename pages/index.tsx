@@ -1,10 +1,7 @@
 import { useContext } from 'react'
 import Head from 'next/head'
-import { Inter } from '@next/font/google'
 import { UserContext } from '../context/SpotifyUserContext'
 import HomeView from '../components/Home/HomeView'
-
-const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   const { user } = useContext(UserContext)
