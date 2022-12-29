@@ -11,12 +11,14 @@ export const UserContext = createContext<SpotifyUserContent>({
   setUser: () => { },
   spotifyToken: "",
   setSpotifyToken: () => "",
-  getTopArtists: () => { }
+  getTopArtists: () => { },
+  isLoggedIn: false
 })
 
 export const UserContextProvider = ({ children }: ChildrenProps) => {
   const [user, setUser] = useState<User>({})
   const [spotifyToken, setSpotifyToken] = useState<string>("")
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
 
   useEffect(() => {
     const _spotifyObject: SpotifyObj = getTokenFromUrl();
@@ -36,6 +38,8 @@ export const UserContextProvider = ({ children }: ChildrenProps) => {
 
   useEffect(() => {
     console.log('user info:', user);
+    console.log('setting isloggedIn status');
+    (Object.keys(user).length !== 0) ? setIsLoggedIn(true) : setIsLoggedIn(false)
   }, [user])
 
   const getTopArtists = () => {
@@ -46,7 +50,7 @@ export const UserContextProvider = ({ children }: ChildrenProps) => {
   }
 
   return (
-    <UserContext.Provider value={{ user, setUser, spotifyToken, setSpotifyToken, getTopArtists }}>
+    <UserContext.Provider value={{ user, setUser, spotifyToken, setSpotifyToken, getTopArtists, isLoggedIn }}>
       {children}
     </UserContext.Provider>
   )

@@ -11,7 +11,8 @@ export type SpotifyUserContent = {
   setUser: (u: User) => void,
   spotifyToken: string,
   setSpotifyToken: (t: string) => void,
-  getTopArtists: () => void
+  getTopArtists: () => void,
+  isLoggedIn: boolean
 }
 
 export interface User {
