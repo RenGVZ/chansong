@@ -42,14 +42,14 @@ export interface SavedTracksInterface {
 export type SavedTracks = {
   added_at?: string
   track: {
-    name?: string,
+    name: string,
     album: {
-      name?: string,
+      name: string,
       images: {
         url: string
       }[],
-      artists?: {
-        name?: string
+      artists: {
+        name: string
       }[]
     }
   }

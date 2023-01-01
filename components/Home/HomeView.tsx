@@ -1,11 +1,10 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { UserContext } from '../../context/SpotifyUserContext'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import LibraryTab from './LibraryTab'
-// import { SavedTracks } from '../../types'
 
 const HomeView = () => {
   const [activeTab, setActiveTab] = useState<string>("music")
@@ -43,7 +42,7 @@ const HomeView = () => {
               null}
           </div>
         </div>
-        {user && (
+        {/* {user && (
           <>
             <p>{user.country}</p>
             <p>{user.display_name}</p>
@@ -52,7 +51,7 @@ const HomeView = () => {
             )}
           </>
         )}
-        <Link href="/artist">Go to artist page</Link>
+        <Link href="/artist">Go to artist page</Link> */}
       </div>
     </div>
   )

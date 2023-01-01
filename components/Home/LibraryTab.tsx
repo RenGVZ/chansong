@@ -19,7 +19,7 @@ const LibraryTab = () => {
   console.log('savedTracks:', savedTracks);
 
   return (
-    <div className="library h-[200px] w-full flex flex-col shadow-cust rounded-[10px]">
+    <div className="library w-full flex flex-col shadow-cust rounded-[10px]">
       <div className="flex w-full justify-between py-4 items-center">
         <h1 className="text-lg uppercase pl-8">Library</h1>
         <div className="flex flex-row w-4/12 items-baseline space-x-4">
@@ -31,10 +31,13 @@ const LibraryTab = () => {
         </div>
       </div>
       <div className="tracks">
-        {savedTracks && savedTracks.items?.map((item: SavedTracks, i) => (
-          <div key={i}>
-            <h1>{item.track.name}</h1>
+        {savedTracks && savedTracks?.items?.slice(0, 5).map((item: SavedTracks, i) => (
+          <div key={i} className="flex">
             <Image src={item.track.album?.images[0].url} width={40} height={40} alt=""></Image>
+            <div className="flex flex-col">
+              <p className="text-lg">{item.track.album.artists && item.track.album.artists[0].name}</p>
+              <p className="text-sm">{item.track.name}</p>
+            </div>
           </div>
         ))}
       </div>
