@@ -1,7 +1,7 @@
 import { useContext, useEffect, useCallback } from 'react';
 import Image from 'next/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import { faMagnifyingGlass, faHeart, faCircleMinus, faPlay } from '@fortawesome/free-solid-svg-icons'
 import { UserContext } from '../../context/SpotifyUserContext';
 import { SavedTracks } from '../../types';
 
@@ -32,12 +32,17 @@ const LibraryTab = () => {
       </div>
       <div className="tracks">
         {savedTracks && savedTracks?.items?.slice(0, 5).map((item: SavedTracks, i) => (
-          <div key={i} className="flex">
+          <div key={i} className="flex items-center">
             <Image src={item.track.album?.images[0].url} width={40} height={40} alt=""></Image>
             <div className="flex flex-col">
               <p className="text-lg">{item.track.album.artists && item.track.album.artists[0].name}</p>
               <p className="text-sm">{item.track.name}</p>
             </div>
+            <FontAwesomeIcon icon={faHeart} className="text-xs" />
+            <FontAwesomeIcon icon={faCircleMinus} className="text-xs" />
+            {/* {item.track.duration_ms} */}
+            <p>{new Date(item?.track?.duration_ms).toISOString().slice(14, 19)}</p>
+            <FontAwesomeIcon icon={faPlay} className="text-xs" />
           </div>
         ))}
       </div>

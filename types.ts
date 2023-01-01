@@ -43,12 +43,13 @@ export type SavedTracks = {
   added_at?: string
   track: {
     name: string,
+    duration_ms: number,
     album: {
       name: string,
       images: {
         url: string
       }[],
-      artists: {
+      artists?: {
         name: string
       }[]
     }
