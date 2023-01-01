@@ -40,7 +40,6 @@ const LibraryTab = () => {
             </div>
             <FontAwesomeIcon icon={faHeart} className="text-xs" />
             <FontAwesomeIcon icon={faCircleMinus} className="text-xs" />
-            {/* {item.track.duration_ms} */}
             <p>{new Date(item?.track?.duration_ms).toISOString().slice(14, 19)}</p>
             <FontAwesomeIcon icon={faPlay} className="text-xs" />
           </div>
