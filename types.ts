@@ -8,14 +8,10 @@ export type ChildrenProps = {
 
 export type SpotifyUserContent = {
   user: User,
-  setUser: (u: User) => void,
-  spotifyToken: string,
-  setSpotifyToken: (t: string) => void,
   isLoggedIn: boolean,
   getTopArtists: () => void,
 
-  savedTracks: SavedTracks,
-  setSavedTracks: (s: SavedTracks) => void,
+  savedTracks: SavedTracksInterface,
   getSavedTracks: () => void,
 }
 
@@ -27,20 +23,34 @@ export interface User {
   images?: ImageItem[]
 }
 
-export interface SavedTracks {
-  track?: {
+export interface ImageItem {
+  height?: number | null,
+  url?: string,
+  width?: number | null
+}
+
+export interface SavedTracksInterface {
+  href?: string,
+  items?: SavedTracks[],
+  limit?: number,
+  next?: string,
+  offset?: number,
+  previous?: string | number,
+  total?: number
+}
+
+export type SavedTracks = {
+  added_at?: string
+  track: {
     name?: string,
-    album?: {
+    album: {
       name?: string,
+      images: {
+        url: string
+      }[],
       artists?: {
         name?: string
       }[]
     }
   }
-}
-
-export interface ImageItem {
-  height?: number | null,
-  url?: string,
-  width?: number | null
 }

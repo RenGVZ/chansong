@@ -5,19 +5,13 @@ import { UserContext } from '../../context/SpotifyUserContext'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import LibraryTab from './LibraryTab'
-import { SavedTracks } from '../../types'
+// import { SavedTracks } from '../../types'
 
 const HomeView = () => {
   const [activeTab, setActiveTab] = useState<string>("music")
-  const { user, getSavedTracks, savedTracks, getTopArtists } = useContext(UserContext)
+  const { user } = useContext(UserContext)
 
   const tabs: string[] = ['music', 'podcasts', 'radio', 'discover']
-
-  useEffect(() => {
-    getSavedTracks()
-    // console.log('savedTracks:', savedTracks);
-
-  }, [getSavedTracks])
 
   return (
     <div className="flex flex-col w-full justify-center items-center">
@@ -58,14 +52,7 @@ const HomeView = () => {
             )}
           </>
         )}
-        <button
-          className="w-1/12 bg-slate-700 text-green-600 rounded-full p-3 font-bold hover:text-slate-700 hover:bg-slate-200"
-          onClick={getSavedTracks}
-        >
-          Get Saved tracks
-        </button>
         <Link href="/artist">Go to artist page</Link>
-
       </div>
     </div>
   )
