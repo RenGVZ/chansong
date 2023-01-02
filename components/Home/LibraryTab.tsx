@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass, faHeart, faCircleMinus, faPlay } from '@fortawesome/free-solid-svg-icons'
 import { UserContext } from '../../context/SpotifyUserContext';
 import { SavedTracks } from '../../types';
+import SectionContainer from '../SectionContainer';
 
 const LibraryTab = () => {
   const { getSavedTracks, savedTracks } = useContext(UserContext)
@@ -28,9 +29,9 @@ const LibraryTab = () => {
   console.log('savedTracks:', savedTracks);
 
   return (
-    <div className="library w-full flex flex-col shadow-cust rounded-[10px] space-y-4 py-4">
-      <div className="flex w-full justify-between items-center">
-        <h1 className="text-lg uppercase pl-8">Library</h1>
+    <SectionContainer>
+      <div className="library flex w-full justify-between items-center">
+        <h1 className="text-lg uppercase pl-3">Library</h1>
         <div className="flex flex-row md:w-4/12 items-baseline space-x-4">
           <div className="flex w-8/12 items-center shadow-library-search rounded-full p-1.5">
             <FontAwesomeIcon icon={faMagnifyingGlass} className="text-xs text-mid px-2" />
@@ -41,7 +42,7 @@ const LibraryTab = () => {
       </div>
       <div className="tracks flex flex-col space-y-3">
         {savedTracks && savedTracks?.items?.slice(0, 5).map((item: SavedTracks, i) => (
-          <div key={i} className="flex items-center justify-between px-6">
+          <div key={i} className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <Image className="rounded-[10px] object-cover" src={item.track.album?.images[0].url} width={42} height={42} alt=""></Image>
               <div className="flex flex-col">
@@ -54,7 +55,7 @@ const LibraryTab = () => {
                 <FontAwesomeIcon icon={faHeart} className="text-xs" width={12} />
                 <FontAwesomeIcon icon={faCircleMinus} className="text-xs" width={12} />
               </div>
-              <div className="w-1/2 flex items-center justify-end space-x-6">
+              <div className="w-1/2 flex items-center justify-end space-x-6 pr-4">
                 <p>{getTrackPlaytime(item.track.duration_ms)}</p>
                 <FontAwesomeIcon icon={faPlay} className="text-xs" width={12} />
               </div>
@@ -62,7 +63,7 @@ const LibraryTab = () => {
           </div>
         ))}
       </div>
-    </div>
+    </SectionContainer>
   )
 }
 

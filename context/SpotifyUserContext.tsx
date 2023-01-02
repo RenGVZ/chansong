@@ -55,7 +55,7 @@ export const UserContextProvider = ({ children }: ChildrenProps) => {
 
   const getTopArtists = () => {
     spotify.getMyTopArtists().then((data) => {
-      console.log(data);
+      console.log('topartists:', data);
 
     })
   }

@@ -5,6 +5,7 @@ import { UserContext } from '../../context/SpotifyUserContext'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import LibraryTab from './LibraryTab'
+import TopArtists from './TopArtists'
 
 const HomeView = () => {
   const [activeTab, setActiveTab] = useState<string>("music")
@@ -42,6 +43,7 @@ const HomeView = () => {
               null}
           </div>
         </div>
+        <TopArtists />
         {/* {user && (
           <>
             <p>{user.country}</p>
