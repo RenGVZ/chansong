@@ -1,6 +1,6 @@
 const PlayerSide = () => {
   return (
-    <div className="player hidden lg:w-[35%] lg:flex lg:flex-col bg-gray-200">
+    <div className="player hidden lg:w-[45%] lg:flex lg:flex-col bg-gray-200">
 
     </div>
   )

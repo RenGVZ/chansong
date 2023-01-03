@@ -26,8 +26,6 @@ const LibraryTab = () => {
     getSavedTracksCallback()
   }, [getSavedTracksCallback])
 
-  console.log('savedTracks:', savedTracks);
-
   return (
     <SectionContainer>
       <div className="library flex w-full justify-between items-center">
@@ -44,7 +42,7 @@ const LibraryTab = () => {
         {savedTracks && savedTracks?.items?.slice(0, 5).map((item: SavedTracks, i) => (
           <div key={i} className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <Image className="rounded-[10px] object-cover" src={item.track.album?.images[0].url} width={42} height={42} alt=""></Image>
+              <Image className="rounded-[10px] object-cover" src={item.track.album?.images[0].url} width={42} height={42} alt="song_image"></Image>
               <div className="flex flex-col">
                 <p className="text-lg leading-none">{item.track.album.artists && item.track.album.artists[0].name}</p>
                 <p className="text-sm leading-none">{item.track.name}</p>

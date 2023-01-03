@@ -9,7 +9,7 @@ import TopArtists from './TopArtists'
 
 const HomeView = () => {
   const [activeTab, setActiveTab] = useState<string>("music")
-  const { user } = useContext(UserContext)
+  // const { user } = useContext(UserContext)
 
   const tabs: string[] = ['music', 'podcasts', 'radio', 'discover']
 
