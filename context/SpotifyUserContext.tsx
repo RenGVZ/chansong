@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
-import { getTokenFromUrl, scopes } from '../utilities'
-import { SpotifyObj, User, SavedTracksInterface, SpotifyUserContent, ChildrenProps, TopArtistsInterface } from '../types'
+import { getTokenFromUrl } from '../utilities'
+import { SpotifyObj, User, SavedTracksInterface, SpotifyUserContent, ChildrenProps, TopArtistsInterface, SavedAlbumsInterface } from '../types'
 import SpotifyWebApi from 'spotify-web-api-js'
 
 const spotify = new SpotifyWebApi()
@@ -13,12 +13,15 @@ export const UserContext = createContext<SpotifyUserContent>({
   getSavedTracks: () => { },
   topArtists: {},
   getTopArtists: () => { },
+  savedAlbums: {},
+  getSavedAlbums: () => { }
 })
 
 export const UserContextProvider = ({ children }: ChildrenProps) => {
   const [user, setUser] = useState<User>({})
   const [savedTracks, setSavedTracks] = useState<SavedTracksInterface>({})
   const [topArtists, setTopArtists] = useState<TopArtistsInterface>({})
+  const [savedAlbums, setSavedAlbums] = useState<SavedAlbumsInterface>({})
   const [spotifyToken, setSpotifyToken] = useState<string>("")
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
 
@@ -57,13 +60,20 @@ export const UserContextProvider = ({ children }: ChildrenProps) => {
 
   const getTopArtists = () => {
     spotify.getMyTopArtists().then((data) => {
-      console.log('topartists:', data);
+      // console.log('topartists:', data);
       setTopArtists(data)
     })
   }
 
+  const getSavedAlbums = () => {
+    spotify.getMySavedAlbums().then((data) => {
+      console.log('savedAlbums:', data);
+      setSavedAlbums(data)
+    })
+  }
+
   return (
-    <UserContext.Provider value={{ user, isLoggedIn, getSavedTracks, savedTracks, getTopArtists, topArtists }}>
+    <UserContext.Provider value={{ user, isLoggedIn, getSavedTracks, savedTracks, getTopArtists, topArtists, getSavedAlbums, savedAlbums }}>
       {children}
     </UserContext.Provider>
   )

@@ -15,7 +15,7 @@ const TopArtists = () => {
     getTopArtistsCallback()
   }, [getTopArtistsCallback])
 
-  console.log('artists from topArtists componet', topArtists);
+  // console.log('artists from topArtists componet', topArtists);
 
 
   return (
