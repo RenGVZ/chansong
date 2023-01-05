@@ -19,7 +19,7 @@ const RecentAlbums = () => {
     <SectionContainerOuter>
       <SectionContainerInner classname={"recent-albums"} title={"Recent Albums"}>
         {savedAlbums && savedAlbums?.items?.slice(0, 4).map((item) => (
-          <div key={item.album.id} className="flex flex-col">
+          <div key={item.album.id} className="flex flex-col items-center">
             <Image src={item.album.images[0].url} className="rounded-[10px] max-h-[150px]" alt="album_image" width={150} height={150}></Image>
             <h1 className="leading-none captalize text-base">{item.album.name}</h1>
             <h1 className="leading-none captalize text-sm">{item.album.artists[0]?.name}</h1>
