@@ -1,6 +1,6 @@
 import { useContext, useEffect, useCallback } from "react"
 import { UserContext } from "../../context/SpotifyUserContext"
-import SectionContainer from "../SectionContainer"
+import SectionContainerOuter from "../SectionContainerOuter"
 import { TopArtists } from "../../types"
 import Image from "next/image"
 
@@ -19,7 +19,7 @@ const TopArtists = () => {
 
 
   return (
-    <SectionContainer>
+    <SectionContainerOuter>
       <div className="top-artists flex w-full justify-between items-center">
         <h1 className="text-lg uppercase pl-3">Top Artists</h1>
         <div className="flex flex-row items-baseline space-x-4 pr-4">
@@ -38,7 +38,7 @@ const TopArtists = () => {
         </div>
 
       </div>
-    </SectionContainer>
+    </SectionContainerOuter>
   )
 }
 
