@@ -14,7 +14,9 @@ export const UserContext = createContext<SpotifyUserContent>({
   topArtists: {},
   getTopArtists: () => { },
   savedAlbums: {},
-  getSavedAlbums: () => { }
+  getSavedAlbums: () => { },
+  getRecommendations: () => { }
+  // recommendations: {}
 })
 
 export const UserContextProvider = ({ children }: ChildrenProps) => {
@@ -67,13 +69,22 @@ export const UserContextProvider = ({ children }: ChildrenProps) => {
 
   const getSavedAlbums = () => {
     spotify.getMySavedAlbums().then((data) => {
-      console.log('savedAlbums:', data);
+      // console.log('savedAlbums:', data);
       setSavedAlbums(data)
     })
   }
 
+  const getRecommendations = () => {
+    console.log('aa');
+
+    spotify.getRecommendations().then((data) => {
+      console.log('recommendations:', data);
+
+    })
+  }
+
   return (
-    <UserContext.Provider value={{ user, isLoggedIn, getSavedTracks, savedTracks, getTopArtists, topArtists, getSavedAlbums, savedAlbums }}>
+    <UserContext.Provider value={{ user, isLoggedIn, getSavedTracks, savedTracks, getTopArtists, topArtists, getSavedAlbums, savedAlbums, getRecommendations }}>
       {children}
     </UserContext.Provider>
   )

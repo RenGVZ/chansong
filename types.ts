@@ -17,6 +17,9 @@ export type SpotifyUserContent = {
 
   savedAlbums: SavedAlbumsInterface,
   getSavedAlbums: () => void
+
+  getRecommendations: () => void
+  // recommendations: RecommendationsInterface
 }
 
 export interface User {
@@ -82,4 +85,12 @@ export type SavedAlbums = {
       url: string
     }[]
   }
+}
+
+export interface RecommendationsInterface {
+  items?: Recommendations[]
+}
+
+export type Recommendations = {
+  name: string
 }

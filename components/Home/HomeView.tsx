@@ -7,6 +7,7 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import LibraryTab from './LibraryTab'
 import TopArtists from './TopArtists'
 import RecentAlbums from './RecentAlbums'
+import Recommendations from './Recommendations'
 
 const HomeView = () => {
   const [activeTab, setActiveTab] = useState<string>("music")
@@ -46,6 +47,7 @@ const HomeView = () => {
         </div>
         <TopArtists />
         <RecentAlbums />
+        <Recommendations />
         {/* {user && (
           <>
             <p>{user.country}</p>
