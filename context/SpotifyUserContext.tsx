@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
 import { getTokenFromUrl } from '../utilities'
-import { SpotifyObj, User, SavedTracksInterface, SpotifyUserContent, ChildrenProps, TopArtistsInterface, SavedAlbumsInterface } from '../types'
+import { SpotifyObj, User, SavedTracksInterface, SpotifyUserContent, ChildrenProps, TopArtistsInterface, SavedAlbumsInterface, ArtistRecommendationsInterface } from '../types'
 import SpotifyWebApi from 'spotify-web-api-js'
 
 const spotify = new SpotifyWebApi()
@@ -15,8 +15,8 @@ export const UserContext = createContext<SpotifyUserContent>({
   getTopArtists: () => { },
   savedAlbums: {},
   getSavedAlbums: () => { },
-  getRecommendations: () => { }
-  // recommendations: {}
+  getArtistRecommendations: () => { },
+  artistRecommendations: {}
 })
 
 export const UserContextProvider = ({ children }: ChildrenProps) => {
@@ -24,6 +24,7 @@ export const UserContextProvider = ({ children }: ChildrenProps) => {
   const [savedTracks, setSavedTracks] = useState<SavedTracksInterface>({})
   const [topArtists, setTopArtists] = useState<TopArtistsInterface>({})
   const [savedAlbums, setSavedAlbums] = useState<SavedAlbumsInterface>({})
+  const [artistRecommendations, setArtistRecommendations] = useState<ArtistRecommendationsInterface>({})
   const [spotifyToken, setSpotifyToken] = useState<string>("")
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
 
@@ -62,7 +63,7 @@ export const UserContextProvider = ({ children }: ChildrenProps) => {
 
   const getTopArtists = () => {
     spotify.getMyTopArtists().then((data) => {
-      // console.log('topartists:', data);
+      // console.log('topartists from first api:', data);
       setTopArtists(data)
     })
   }
@@ -74,28 +75,22 @@ export const UserContextProvider = ({ children }: ChildrenProps) => {
     })
   }
 
-  const getRecommendations = () => {
-    console.log('aa');
-
+  const getArtistRecommendations = () => {
+    console.log('top artists:', topArtists);
     var seeds = {
-      seed_tracks: [
-        '0c6xIDDpzE81m2q797ordA',
-      ],
-      seed_artists: [
-        '4NHQUGzhtTLFvgF5SZesLK',
-      ],
-      seed_genres: [
-        "classical,country"
-      ],
+      // seed_tracks: savedTracks.items?.splice(0, 5).map((song) => song.track.id),
+      seed_artists: topArtists.items?.splice(0, 5).map((artist) => artist.id),
+      // seed_genres: [
+      //   "classical,country"
+      // ],
     };
     spotify.getRecommendations(seeds).then((data) => {
-      console.log('recommendations:', data);
-
+      setArtistRecommendations(data);
     })
   }
 
   return (
-    <UserContext.Provider value={{ user, isLoggedIn, getSavedTracks, savedTracks, getTopArtists, topArtists, getSavedAlbums, savedAlbums, getRecommendations }}>
+    <UserContext.Provider value={{ user, isLoggedIn, getSavedTracks, savedTracks, getTopArtists, topArtists, getSavedAlbums, savedAlbums, getArtistRecommendations, artistRecommendations }}>
       {children}
     </UserContext.Provider>
   )

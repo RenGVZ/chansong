@@ -11,6 +11,7 @@ import Recommendations from './Recommendations'
 
 const HomeView = () => {
   const [activeTab, setActiveTab] = useState<string>("music")
+  const { topArtists } = useContext(UserContext)
   // const { user } = useContext(UserContext)
 
   const tabs: string[] = ['music', 'podcasts', 'radio', 'discover']
@@ -47,7 +48,9 @@ const HomeView = () => {
         </div>
         <TopArtists />
         <RecentAlbums />
-        <Recommendations />
+        {Object.keys(topArtists).length > 0 &&
+          <Recommendations />
+        }
         {/* {user && (
           <>
             <p>{user.country}</p>
