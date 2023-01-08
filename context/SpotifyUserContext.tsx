@@ -77,7 +77,18 @@ export const UserContextProvider = ({ children }: ChildrenProps) => {
   const getRecommendations = () => {
     console.log('aa');
 
-    spotify.getRecommendations().then((data) => {
+    var seeds = {
+      seed_tracks: [
+        '0c6xIDDpzE81m2q797ordA',
+      ],
+      seed_artists: [
+        '4NHQUGzhtTLFvgF5SZesLK',
+      ],
+      seed_genres: [
+        "classical,country"
+      ],
+    };
+    spotify.getRecommendations(seeds).then((data) => {
       console.log('recommendations:', data);
 
     })
