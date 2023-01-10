@@ -15,8 +15,8 @@ export const UserContext = createContext<SpotifyUserContent>({
   getTopArtists: () => { },
   savedAlbums: {},
   getSavedAlbums: () => { },
-  getArtistRecommendations: () => { },
-  artistRecommendations: {}
+  artistRecommendations: {},
+  getArtistRecommendations: () => { }
 })
 
 export const UserContextProvider = ({ children }: ChildrenProps) => {
