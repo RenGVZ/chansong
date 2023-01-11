@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
 import { getTokenFromUrl } from '../utilities'
-import { SpotifyObj, User, SavedTracksInterface, SpotifyUserContent, ChildrenProps, TopArtistsInterface, SavedAlbumsInterface, ArtistRecommendationsInterface } from '../types'
+import { SpotifyObj, User, SavedTracksInterface, SpotifyUserContent, ChildrenProps, TopArtistsInterface, SavedAlbumsInterface, ArtistRecommendationsInterface, CurrentTrackInterface } from '../types'
 import SpotifyWebApi from 'spotify-web-api-js'
 
 const spotify = new SpotifyWebApi()
@@ -16,7 +16,9 @@ export const UserContext = createContext<SpotifyUserContent>({
   savedAlbums: {},
   getSavedAlbums: () => { },
   artistRecommendations: {},
-  getArtistRecommendations: () => { }
+  getArtistRecommendations: () => { },
+  currentTrack: {},
+  getCurrentTrack: () => { },
 })
 
 export const UserContextProvider = ({ children }: ChildrenProps) => {
@@ -25,6 +27,7 @@ export const UserContextProvider = ({ children }: ChildrenProps) => {
   const [topArtists, setTopArtists] = useState<TopArtistsInterface>({})
   const [savedAlbums, setSavedAlbums] = useState<SavedAlbumsInterface>({})
   const [artistRecommendations, setArtistRecommendations] = useState<ArtistRecommendationsInterface>({})
+  const [currentTrack, setCurrentTrack] = useState<CurrentTrackInterface>({})
   const [spotifyToken, setSpotifyToken] = useState<string>("")
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
 
@@ -45,8 +48,7 @@ export const UserContextProvider = ({ children }: ChildrenProps) => {
   }, [])
 
   useEffect(() => {
-    console.log('user info:', user);
-    console.log('setting isloggedIn status');
+    // console.log('user info:', user);
     (Object.keys(user).length !== 0) ? setIsLoggedIn(true) : setIsLoggedIn(false)
   }, [user])
 
@@ -76,7 +78,7 @@ export const UserContextProvider = ({ children }: ChildrenProps) => {
   }
 
   const getArtistRecommendations = () => {
-    console.log('top artists:', topArtists);
+    // console.log('top artists:', topArtists);
     var seeds = {
       // seed_tracks: savedTracks.items?.splice(0, 5).map((song) => song.track.id),
       seed_artists: topArtists.items?.splice(0, 5).map((artist) => artist.id),
@@ -89,8 +91,31 @@ export const UserContextProvider = ({ children }: ChildrenProps) => {
     })
   }
 
+  const getCurrentTrack = () => {
+    spotify.getMyCurrentPlayingTrack().then((data) => {
+      console.log('currentTrack:', data);
+      if (data && data.item) {
+        setCurrentTrack(data.item)
+      }
+    })
+  }
+
   return (
-    <UserContext.Provider value={{ user, isLoggedIn, getSavedTracks, savedTracks, getTopArtists, topArtists, getSavedAlbums, savedAlbums, getArtistRecommendations, artistRecommendations }}>
+    <UserContext.Provider
+      value={{
+        user,
+        isLoggedIn,
+        getSavedTracks,
+        savedTracks,
+        getTopArtists,
+        topArtists,
+        getSavedAlbums,
+        savedAlbums,
+        getArtistRecommendations,
+        artistRecommendations,
+        getCurrentTrack,
+        currentTrack
+      }}>
       {children}
     </UserContext.Provider>
   )

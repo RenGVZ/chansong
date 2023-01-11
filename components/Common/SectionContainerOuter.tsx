@@ -1,4 +1,4 @@
-import { ChildrenProps } from "../types"
+import { ChildrenProps } from "../../types"
 
 const SectionContainerOuter = ({ children }: ChildrenProps) => {
   return (

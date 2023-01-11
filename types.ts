@@ -19,7 +19,27 @@ export type SpotifyUserContent = {
   getSavedAlbums: () => void,
 
   artistRecommendations: ArtistRecommendationsInterface,
-  getArtistRecommendations: () => void
+  getArtistRecommendations: () => void,
+
+  currentTrack: CurrentTrackInterface,
+  getCurrentTrack: () => void,
+}
+
+export type Artist = {
+  id: string,
+  name: string,
+  type: string
+}
+
+export type Album = {
+  id: string,
+  artists?: {
+    name: string
+  }[],
+  name: string,
+  images: {
+    url: string
+  }[]
 }
 
 export interface User {
@@ -46,15 +66,7 @@ export type SavedTracks = {
     id: string,
     name: string,
     duration_ms: number,
-    album: {
-      name: string,
-      images: {
-        url: string
-      }[],
-      artists?: {
-        name: string
-      }[]
-    }
+    album: Album
   }
 }
 
@@ -76,16 +88,7 @@ export interface SavedAlbumsInterface {
 }
 
 export type SavedAlbums = {
-  album: {
-    id: string,
-    artists: {
-      name: string
-    }[],
-    name: string,
-    images: {
-      url: string
-    }[]
-  }
+  album: Album
 }
 
 export interface ArtistRecommendationsInterface {
@@ -95,13 +98,26 @@ export interface ArtistRecommendationsInterface {
 export type Recommendations = {
   id: string,
   name: string,
-  album?: {
-    name: string,
-    images: {
-      url: string
-    }[]
-  },
+  album?: Album,
   artists: {
     name: string
   }[]
+}
+
+export interface CurrentTrackInterface {
+  is_playing?: boolean,
+  items?: Track[]
+  // item?: {
+  //   id?: string,
+  //   name?: string,
+  //   album?: Album,
+  //   artists?: Artist[]
+  // }
+}
+
+export type Track = {
+  id?: string,
+  name?: string,
+  album?: Album,
+  artists?: Artist[]
 }

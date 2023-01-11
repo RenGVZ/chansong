@@ -3,7 +3,7 @@ import { UserContext } from "../context/SpotifyUserContext"
 import { ChildrenProps } from "../types"
 import LoginView from "./LoginView"
 import Sidebar from "./Sidebar"
-import PlayerSide from "./PlayerSide"
+import PlayerSide from "./PlayerSidePc/PlayerSide"
 
 const MainContainer = ({ children }: ChildrenProps) => {
   const { isLoggedIn } = useContext(UserContext)

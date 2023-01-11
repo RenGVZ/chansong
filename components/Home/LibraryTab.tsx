@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass, faHeart, faCircleMinus, faPlay } from '@fortawesome/free-solid-svg-icons'
 import { UserContext } from '../../context/SpotifyUserContext';
 import { SavedTracks } from '../../types';
-import SectionContainer from '../SectionContainerOuter';
+import SectionContainer from '../Common/SectionContainerOuter';
 
 const LibraryTab = () => {
   const { getSavedTracks, savedTracks } = useContext(UserContext)

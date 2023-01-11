@@ -1,7 +1,7 @@
 import { useContext, useEffect, useCallback } from "react"
 import { UserContext } from "../../context/SpotifyUserContext"
-import SectionContainerInner from "../SectionContainerInner"
-import SectionContainerOuter from "../SectionContainerOuter"
+import SectionContainerInner from "../Common/SectionContainerInner"
+import SectionContainerOuter from "../Common/SectionContainerOuter"
 import Image from "next/image"
 import { Recommendations } from "../../types"
 
@@ -15,9 +15,6 @@ const Recommendations = () => {
   useEffect(() => {
     getArtistRecommendationsCallback()
   }, [getArtistRecommendationsCallback])
-
-  console.log('artist recommendations:', artistRecommendations);
-
 
   return (
     <SectionContainerOuter>
