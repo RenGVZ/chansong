@@ -106,7 +106,8 @@ export type Recommendations = {
 
 export interface CurrentTrackInterface {
   is_playing?: boolean,
-  items?: Track[]
+  items?: Track[],
+  item?: Track[]
   // item?: {
   //   id?: string,
   //   name?: string,

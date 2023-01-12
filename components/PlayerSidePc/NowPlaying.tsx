@@ -20,11 +20,9 @@ const NowPlaying = () => {
     <SectionContainerOuter>
       <div className="now-playing flex flex-col w-full justify-center items-center">
         <h1 className="text-lg uppercase pl-3">Now Playing</h1>
-        {currentTrack && currentTrack.item?.map((track) => (
-          <div key={track.id} className="flex">
-            {track.name}
-          </div>
-        ))}
+        <div key={currentTrack.id} className="flex">
+          {currentTrack.name}
+        </div>
       </div>
     </SectionContainerOuter>
   )

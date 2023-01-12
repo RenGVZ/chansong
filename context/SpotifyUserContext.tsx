@@ -91,13 +91,25 @@ export const UserContextProvider = ({ children }: ChildrenProps) => {
     })
   }
 
-  const getCurrentTrack = () => {
-    spotify.getMyCurrentPlayingTrack().then((data) => {
-      console.log('currentTrack:', data);
-      if (data && data.item) {
-        setCurrentTrack(data.item)
-      }
-    })
+  const getCurrentTrack = async () => {
+    try {
+      const result = await fetch('https://api.spotify.com/v1/me/player/currently-playing', {
+        headers: {
+          "Authorization": `Bearer ${spotifyToken}`,
+          "Content-Type": "application/json"
+        }
+      })
+      let data = await result.json()
+      setCurrentTrack(data.item)
+    } catch (err) {
+      console.error(err)
+    }
+
+
+    // spotify.getMyCurrentPlayingTrack().then((data) => {
+    //   console.log('currentTrack:', data);
+    //   setCurrentTrack(data.item)
+    // })
   }
 
   return (
