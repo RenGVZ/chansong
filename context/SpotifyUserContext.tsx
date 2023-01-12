@@ -19,6 +19,8 @@ export const UserContext = createContext<SpotifyUserContent>({
   getArtistRecommendations: () => { },
   currentTrack: {},
   getCurrentTrack: () => { },
+  currentTrackProg: 0,
+  getUsersPlaylists: () => { }
 })
 
 export const UserContextProvider = ({ children }: ChildrenProps) => {
@@ -28,6 +30,7 @@ export const UserContextProvider = ({ children }: ChildrenProps) => {
   const [savedAlbums, setSavedAlbums] = useState<SavedAlbumsInterface>({})
   const [artistRecommendations, setArtistRecommendations] = useState<ArtistRecommendationsInterface>({})
   const [currentTrack, setCurrentTrack] = useState<CurrentTrackInterface>({})
+  const [currentTrackProg, setCurrentTrackProg] = useState<number>(0)
   const [spotifyToken, setSpotifyToken] = useState<string>("")
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
 
@@ -57,7 +60,6 @@ export const UserContextProvider = ({ children }: ChildrenProps) => {
     spotify.getMySavedTracks().then((data) => {
       if (data && data.items) {
         tracks = data
-        // console.log('tracks:', tracks);
         setSavedTracks(tracks)
       }
     })
@@ -65,14 +67,12 @@ export const UserContextProvider = ({ children }: ChildrenProps) => {
 
   const getTopArtists = () => {
     spotify.getMyTopArtists().then((data) => {
-      // console.log('topartists from first api:', data);
       setTopArtists(data)
     })
   }
 
   const getSavedAlbums = () => {
     spotify.getMySavedAlbums().then((data) => {
-      // console.log('savedAlbums:', data);
       setSavedAlbums(data)
     })
   }
@@ -95,23 +95,33 @@ export const UserContextProvider = ({ children }: ChildrenProps) => {
     try {
       const result = await fetch('https://api.spotify.com/v1/me/player/currently-playing', {
         headers: {
-          "Authorization": `Bearer ${spotifyToken}`,
-          "Content-Type": "application/json"
+          'Authorization': `Bearer ${spotifyToken}`,
+          'Content-Type': 'application/json'
         }
       })
       let data = await result.json()
       console.log('currentTrack data:', data);
-
+      setCurrentTrackProg(data.progress_ms)
       setCurrentTrack(data.item)
     } catch (err) {
       console.error(err)
     }
+  }
 
+  const getUsersPlaylists = async () => {
+    try {
+      const results = await fetch('https://api.spotify.com/v1/me/playlist', {
+        headers: {
+          'Authorization': `Bearer ${spotifyToken}`,
+          'Content-Type': "application/json"
+        }
+      })
+      let data = await results.json()
+      console.log('usersPlaylists:', data);
 
-    // spotify.getMyCurrentPlayingTrack().then((data) => {
-    //   console.log('currentTrack:', data);
-    //   setCurrentTrack(data.item)
-    // })
+    } catch (error) {
+
+    }
   }
 
   return (
@@ -128,7 +138,9 @@ export const UserContextProvider = ({ children }: ChildrenProps) => {
         getArtistRecommendations,
         artistRecommendations,
         getCurrentTrack,
-        currentTrack
+        currentTrack,
+        currentTrackProg,
+        getUsersPlaylists
       }}>
       {children}
     </UserContext.Provider>

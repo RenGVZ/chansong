@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 
 const NowPlaying = () => {
-  const { getCurrentTrack, currentTrack } = useContext(UserContext)
+  const { getCurrentTrack, currentTrack, currentTrackProg } = useContext(UserContext)
 
   const getCurrentTrackCallback = useCallback(() => {
     getCurrentTrack()
@@ -16,13 +16,12 @@ const NowPlaying = () => {
     getCurrentTrackCallback()
   }, [getCurrentTrackCallback])
 
-  // getCurrentTrack()
-  console.log('track', currentTrack);
+  // console.log('track', currentTrack);
 
   return (
     <SectionContainerOuter>
-      <div className="now-playing relative flex flex-col w-full justify-center items-center space-y-4">
-        <h1 className="text-lg uppercase pl-3">Now Playing</h1>
+      <div className="now-playing flex flex-col w-full justify-center items-center space-y-4">
+        <h1 className="text-lg uppercase">Now Playing</h1>
         {currentTrack?.album &&
           <img
             className="rounded-[10px] max-w-[317px] max-h-[317px]"
@@ -37,8 +36,7 @@ const NowPlaying = () => {
             </div>
           </div>
           {currentTrack.artists && <h1 className="w-full text-center text-sm">{currentTrack.artists[0].name}</h1>}
-
-
+          {currentTrackProg} {currentTrack.duration_ms}
         </div>
       </div>
     </SectionContainerOuter>

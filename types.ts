@@ -23,102 +23,94 @@ export type SpotifyUserContent = {
 
   currentTrack: CurrentTrackInterface,
   getCurrentTrack: () => void,
+
+  currentTrackProg: number,
+  getUsersPlaylists: () => void
 }
 
 export type Artist = {
-  id: string,
-  name: string,
-  type: string
+  id: string;
+  name: string;
+  type: string;
 }
 
 export type Album = {
-  id: string,
+  id: string;
   artists?: {
-    name: string
-  }[],
-  name: string,
+    name: string;
+  }[];
+  name: string;
   images: {
-    url: string
-  }[]
+    url: string;
+  }[];
 }
 
 export interface User {
-  country?: string,
-  display_name?: string,
-  email?: string,
-  href?: string,
-  images?: ImageItem[]
+  country?: string;
+  display_name?: string;
+  email?: string;
+  href?: string;
+  images?: ImageItem[];
 }
 
 export interface ImageItem {
-  height?: number | null,
-  url?: string,
-  width?: number | null
+  height?: number | null;
+  url?: string;
+  width?: number | null;
 }
 
 export interface SavedTracksInterface {
-  items?: SavedTracks[],
+  items?: SavedTracks[];
 }
 
 export type SavedTracks = {
-  added_at?: string
+  added_at?: string;
   track: {
-    id: string,
-    name: string,
-    duration_ms: number,
-    album: Album
-  }
+    id: string;
+    name: string;
+    duration_ms: number;
+    album: Album;
+  };
 }
 
 export interface TopArtistsInterface {
-  items?: TopArtists[]
+  items?: TopArtists[];
 }
 
 export type TopArtists = {
-  id: string
-  name: string,
-  type: string,
+  id: string;
+  name: string;
+  type: string;
   images: {
-    url: string
-  }[],
+    url: string;
+  }[];
 }
 
 export interface SavedAlbumsInterface {
-  items?: SavedAlbums[]
+  items?: SavedAlbums[];
 }
 
 export type SavedAlbums = {
-  album: Album
+  album: Album;
 }
 
 export interface ArtistRecommendationsInterface {
-  tracks?: Recommendations[]
+  tracks?: Recommendations[];
 }
 
 export type Recommendations = {
-  id: string,
-  name: string,
-  album?: Album,
+  id: string;
+  name: string;
+  album?: Album;
   artists: {
-    name: string
-  }[]
+    name: string;
+  }[];
 }
 
-export interface CurrentTrackInterface {
-  is_playing?: boolean,
-  items?: Track[],
-  item?: Track[]
-  // item?: {
-  //   id?: string,
-  //   name?: string,
-  //   album?: Album,
-  //   artists?: Artist[]
-  // }
-}
-
-export type Track = {
-  id?: string,
-  name?: string,
-  album?: Album,
-  artists?: Artist[]
+export type CurrentTrackInterface = {
+  id?: string;
+  duration_ms?: string;
+  name?: string;
+  album?: Album;
+  artists?: Artist[];
 }
