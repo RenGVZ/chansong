@@ -100,6 +100,8 @@ export const UserContextProvider = ({ children }: ChildrenProps) => {
         }
       })
       let data = await result.json()
+      console.log('currentTrack data:', data);
+
       setCurrentTrack(data.item)
     } catch (err) {
       console.error(err)
