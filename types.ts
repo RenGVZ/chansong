@@ -121,13 +121,13 @@ export type UsersPlaylistsInterface = {
 }
 
 export type Playlists = {
-  description: string;
-  id: string;
-  name: string;
-  images: {
+  description?: string;
+  id?: string;
+  name?: string;
+  images?: {
     url: string;
   }[];
-  owner: {
+  owner?: {
     display_name: string
   }
 }

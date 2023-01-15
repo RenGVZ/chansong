@@ -1,10 +1,13 @@
 import { useState, useContext, useCallback, useEffect } from "react"
 import SectionContainerOuter from "../Common/SectionContainerOuter"
 import { UserContext } from "../../context/SpotifyUserContext"
+import PodPlayItem from "./PodPlayItem"
+import { Playlists } from "../../types"
 
 const RecentPlaylistsPods = () => {
   const [playlistSelected, setPlaylistSelected] = useState<boolean>(true)
   const { getUsersPlaylists, usersPlaylists } = useContext(UserContext)
+  const items = usersPlaylists?.items ?? []
 
   const getUsersPlaylistsCallback = useCallback(() => {
     getUsersPlaylists()
@@ -28,7 +31,9 @@ const RecentPlaylistsPods = () => {
           </div>
           <div className="flex flex-col">
             {playlistSelected ? (
-              <p>playlists</p>
+              items.slice(0, 4).map((playlist: Playlists) => (
+                <PodPlayItem key={playlist.id} playlist={playlist} />
+              ))
             ) : (
               <p>podcasts</p>
             )}
