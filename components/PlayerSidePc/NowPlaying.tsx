@@ -30,13 +30,13 @@ const NowPlaying = () => {
         }
         <div className="w-full flex flex-col">
           <div className="w-full items-center flex px-4">
-            <h1 className="text-lg grow text-center">{currentTrack.name}</h1>
+            <h1 className="text-lg grow text-center">{currentTrack?.name}</h1>
             <div className="flex-none">
               <FontAwesomeIcon icon={faHeart} className="text-mid text-2xl" />
             </div>
           </div>
-          {currentTrack.artists && <h1 className="w-full text-center text-sm">{currentTrack.artists[0].name}</h1>}
-          {currentTrackProg} {currentTrack.duration_ms}
+          {currentTrack?.artists && <h1 className="w-full text-center text-sm">{currentTrack?.artists[0]?.name}</h1>}
+          {currentTrackProg && currentTrackProg} {currentTrack?.duration_ms}
         </div>
       </div>
     </SectionContainerOuter>

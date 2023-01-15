@@ -25,6 +25,7 @@ export type SpotifyUserContent = {
   getCurrentTrack: () => void,
 
   currentTrackProg: number,
+  usersPlaylists: UsersPlaylistsInterface,
   getUsersPlaylists: () => void
 }
 
@@ -113,4 +114,20 @@ export type CurrentTrackInterface = {
   name?: string;
   album?: Album;
   artists?: Artist[];
+}
+
+export type UsersPlaylistsInterface = {
+  items?: Playlists[];
+}
+
+export type Playlists = {
+  description: string;
+  id: string;
+  name: string;
+  images: {
+    url: string;
+  }[];
+  owner: {
+    display_name: string
+  }
 }

@@ -1,9 +1,20 @@
-import { useState } from "react"
+import { useState, useContext, useCallback, useEffect } from "react"
 import SectionContainerOuter from "../Common/SectionContainerOuter"
+import { UserContext } from "../../context/SpotifyUserContext"
 
 const RecentPlaylistsPods = () => {
   const [playlistSelected, setPlaylistSelected] = useState<boolean>(true)
-  console.log('rendering');
+  const { getUsersPlaylists, usersPlaylists } = useContext(UserContext)
+
+  const getUsersPlaylistsCallback = useCallback(() => {
+    getUsersPlaylists()
+  }, [])
+
+  useEffect(() => {
+    getUsersPlaylistsCallback()
+  }, [getUsersPlaylistsCallback])
+
+  console.log('usersPlaylists:', usersPlaylists);
 
   return (
     <SectionContainerOuter>
