@@ -7,17 +7,17 @@ import { Playlists } from "../../types"
 const RecentPlaylistsPods = () => {
   const [playlistSelected, setPlaylistSelected] = useState<boolean>(true)
   const { getUsersPlaylists, usersPlaylists } = useContext(UserContext)
-  const items = usersPlaylists?.items ?? []
-
-  const getUsersPlaylistsCallback = useCallback(() => {
-    getUsersPlaylists()
-  }, [])
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   useEffect(() => {
-    getUsersPlaylistsCallback()
-  }, [getUsersPlaylistsCallback])
+    if (!isLoading) {
+      setIsLoading(true);
+      getUsersPlaylists()
+      setIsLoading(false)
+    }
+  }, [isLoading])
 
-  console.log('usersPlaylists:', usersPlaylists);
+  // console.log('usersPlaylists:', usersPlaylists);
 
   return (
     <SectionContainerOuter>
@@ -29,9 +29,9 @@ const RecentPlaylistsPods = () => {
             /
             <button className={`text-${playlistSelected ? 'mid' : 'black'} text-lg uppercase`} onClick={() => setPlaylistSelected(false)}>Podcasts</button>
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col w-full">
             {playlistSelected ? (
-              items.slice(0, 4).map((playlist: Playlists) => (
+              usersPlaylists.items?.slice(0, 4).map((playlist: Playlists) => (
                 <PodPlayItem key={playlist.id} playlist={playlist} />
               ))
             ) : (
