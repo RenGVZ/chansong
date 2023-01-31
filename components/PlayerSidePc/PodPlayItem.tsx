@@ -1,16 +1,21 @@
-import { Playlists } from "../../types"
-import Image from 'next/image'
+import { Playlists } from '../../types';
+import { memo } from 'react';
 
 type Props = {
   playlist: Playlists;
-}
+};
 
-const PodPlayItem = ({ playlist }: Props) => {
-  console.log('playlist:', playlist);
+// eslint-disable-next-line react/display-name
+const PodPlayItem = memo(({ playlist }: Props) => {
+  console.log('playlist rendering:');
   return (
     <div className="flex">
       {playlist && playlist.images && (
-        <img className="w-[77px] h-[77px]" src={playlist.images[0].url} alt="" />
+        <img
+          className="w-[77px] h-[77px]"
+          src={playlist.images[0].url}
+          alt=""
+        />
       )}
       <div className="flex flex-col">
         <h1>{playlist.name}</h1>
@@ -18,7 +23,7 @@ const PodPlayItem = ({ playlist }: Props) => {
         <p>{playlist?.owner?.display_name}</p>
       </div>
     </div>
-  )
-}
+  );
+});
 
-export default PodPlayItem
+export default PodPlayItem;

@@ -1,26 +1,29 @@
-import React, { useState, useContext } from 'react'
-import Image from 'next/image'
-import Link from 'next/link'
-import { UserContext } from '../../context/SpotifyUserContext'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
-import LibraryTab from './LibraryTab'
-import TopArtists from './TopArtists'
-import RecentAlbums from './RecentAlbums'
-import Recommendations from './Recommendations'
+import React, { useState, useContext } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { UserContext } from '../../context/SpotifyUserContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import LibraryTab from './LibraryTab';
+import TopArtists from './TopArtists';
+import RecentAlbums from './RecentAlbums';
+import Recommendations from './Recommendations';
 
 const HomeView = () => {
-  const [activeTab, setActiveTab] = useState<string>("music")
-  const { topArtists } = useContext(UserContext)
+  const [activeTab, setActiveTab] = useState<string>('music');
+  const { topArtists } = useContext(UserContext);
   // const { user } = useContext(UserContext)
 
-  const tabs: string[] = ['music', 'podcasts', 'radio', 'discover']
+  const tabs: string[] = ['music', 'podcasts', 'radio', 'discover'];
 
   return (
     <div className="flex flex-col w-full justify-center items-center">
       <div className="w-[88%] flex flex-col items-start pt-10 space-y-6">
         <div className="w-full flex items-center shadow-cust rounded-full p-4">
-          <FontAwesomeIcon icon={faMagnifyingGlass} className="text-sm text-mid px-2" />
+          <FontAwesomeIcon
+            icon={faMagnifyingGlass}
+            className="text-sm text-mid px-2"
+          />
           <p className="text-dark text-sm">Search</p>
         </div>
         <div className="tab-area w-full flex flex-col space-y-4">
@@ -28,9 +31,17 @@ const HomeView = () => {
             {tabs.map((tab, i) => (
               <li
                 key={i}
-                className={tab == activeTab ? 'underline capitalize cursor-pointer' : 'capitalize cursor-pointer'}
-                onClick={(event: React.MouseEvent<HTMLElement>) => setActiveTab(tab)}
-              >{tab}</li>
+                className={
+                  tab == activeTab
+                    ? 'underline capitalize cursor-pointer'
+                    : 'capitalize cursor-pointer'
+                }
+                onClick={(event: React.MouseEvent<HTMLElement>) =>
+                  setActiveTab(tab)
+                }
+              >
+                {tab}
+              </li>
             ))}
           </ul>
           <div className="music-tab w-full flex flex-col">
@@ -42,15 +53,12 @@ const HomeView = () => {
               <div>Radio</div>
             ) : activeTab === 'discover' ? (
               <div>Discover</div>
-            ) :
-              null}
+            ) : null}
           </div>
         </div>
         <TopArtists />
         <RecentAlbums />
-        {Object.keys(topArtists).length > 0 &&
-          <Recommendations />
-        }
+        {Object.keys(topArtists).length > 0 && <Recommendations />}
         {/* {user && (
           <>
             <p>{user.country}</p>
@@ -63,7 +71,7 @@ const HomeView = () => {
         <Link href="/artist">Go to artist page</Link> */}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default HomeView
+export default HomeView;
