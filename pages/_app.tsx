@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { Just_Me_Again_Down_Here } from '@next/font/google'

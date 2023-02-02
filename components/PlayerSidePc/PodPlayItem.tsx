@@ -1,5 +1,7 @@
+/* eslint-disable @next/next/no-img-element */
 import { Playlists } from '../../types';
 import { memo } from 'react';
+import { truncateWord } from '../../utilities';
 
 type Props = {
   playlist: Playlists;
@@ -9,7 +11,7 @@ type Props = {
 const PodPlayItem = memo(({ playlist }: Props) => {
   console.log('playlist rendering:');
   return (
-    <div className="flex">
+    <div className="flex space-x-2">
       {playlist && playlist.images && (
         <img
           className="w-[77px] h-[77px]"
@@ -19,7 +21,7 @@ const PodPlayItem = memo(({ playlist }: Props) => {
       )}
       <div className="flex flex-col">
         <h1>{playlist.name}</h1>
-        <p>{playlist?.description?.slice(0, 14)}</p>
+        <p>{truncateWord(playlist?.description)}</p>
         <p>{playlist?.owner?.display_name}</p>
       </div>
     </div>

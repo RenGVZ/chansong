@@ -29,7 +29,7 @@ const RecentPlaylistsPods = () => {
             /
             <button className={`text-${playlistSelected ? 'mid' : 'black'} text-lg uppercase`} onClick={() => setPlaylistSelected(false)}>Podcasts</button>
           </div>
-          <div className="flex flex-col w-full">
+          <div className="flex flex-col w-full space-y-4 py-4">
             {playlistSelected ? (
               usersPlaylists.items?.slice(0, 4).map((playlist: Playlists) => (
                 <PodPlayItem key={playlist.id} playlist={playlist} />

@@ -1,6 +1,4 @@
 import React, { useState, useContext } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
 import { UserContext } from '../../context/SpotifyUserContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
