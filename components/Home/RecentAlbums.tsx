@@ -34,10 +34,10 @@ const RecentAlbums = () => {
                 height={150}
               ></Image>
               <h1 className="leading-none captalize text-base self-start">
-                {truncateWord(item.album.name)}
+                {truncateWord(item.album.name, 26)}
               </h1>
               <h1 className="leading-none captalize text-sm self-start">
-                {truncateWord(item.album.artists && item.album.artists[0].name)}
+                {truncateWord(item.album.artists && item.album.artists[0].name, 26)}
               </h1>
             </div>
           ))}

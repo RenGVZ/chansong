@@ -38,11 +38,11 @@ const Recommendations = () => {
                     height={150}
                   ></Image>
                 )}
-                <h1 className="leading-none captalize text-base self-start truncate">
-                  {truncateWord(rec?.name)}
+                <h1 className="leading-none captalize text-base self-start">
+                  {truncateWord(rec?.name, 26)}
                 </h1>
                 <h1 className="leading-none captalize text-sm self-start">
-                  {truncateWord(rec.artists[0].name)}
+                  {truncateWord(rec.artists[0].name, 26)}
                 </h1>
               </div>
             ))}
