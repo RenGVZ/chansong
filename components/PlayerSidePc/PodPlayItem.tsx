@@ -1,28 +1,34 @@
 /* eslint-disable @next/next/no-img-element */
-import { Playlists } from '../../types';
+import { Playlists, Episode } from '../../types';
 import { memo } from 'react';
 import { truncateWord } from '../../utilities';
 
 type Props = {
-  playlist: Playlists;
+  content: Playlists | Episode;
+  type: string;
 };
 
 // eslint-disable-next-line react/display-name
-const PodPlayItem = memo(({ playlist }: Props) => {
-  console.log('playlist rendering:');
+const PodPlayItem = memo(({ content, type }: Props) => {
+  console.log('content:', content);
+
   return (
     <div className="flex space-x-2">
-      {playlist && playlist.images && (
+      {content && content.images && (
         <img
           className="w-[77px] h-[77px] rounded-[10px]"
-          src={playlist.images[0].url}
+          src={content.images[0].url}
           alt=""
         />
       )}
       <div className="flex flex-col">
-        <h1>{playlist.name}</h1>
-        {/* <p className=' break-words'>{playlist.description && truncateWord(playlist.description, 56)}</p> */}
-        <p>{playlist?.owner?.display_name}</p>
+        <h1>{content.name}</h1>
+        {/* <p className=' break-words'>{content.description && truncateWord(content.description, 56)}</p> */}
+        {(type === 'playlist') ? (
+          <p>{content?.owner?.display_name}</p>
+        ) : (
+          <p>{content?.show?.name}</p>
+        )}
       </div>
     </div>
   );

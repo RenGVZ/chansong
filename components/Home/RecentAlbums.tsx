@@ -37,7 +37,7 @@ const RecentAlbums = () => {
                 {truncateWord(item.album.name, 26)}
               </h1>
               <h1 className="leading-none captalize text-sm self-start">
-                {truncateWord(item.album.artists && item.album.artists[0].name, 26)}
+                {truncateWord(item.album?.artists[0].name, 26)}
               </h1>
             </div>
           ))}

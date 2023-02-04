@@ -1,3 +1,5 @@
+import { type } from "os"
+
 export interface SpotifyObj {
   access_token?: string
 }
@@ -26,7 +28,10 @@ export type SpotifyUserContent = {
 
   currentTrackProg: number,
   usersPlaylists: UsersPlaylistsInterface,
-  getUsersPlaylists: () => void
+  getUsersPlaylists: () => void,
+
+  getSeveralEpisodes: () => void,
+  episodes: EpisodesInterface
 }
 
 export type Artist = {
@@ -108,7 +113,7 @@ export type Recommendations = {
   }[];
 }
 
-export type CurrentTrackInterface = {
+export interface CurrentTrackInterface {
   id?: string;
   duration_ms?: string;
   name?: string;
@@ -116,7 +121,7 @@ export type CurrentTrackInterface = {
   artists?: Artist[];
 }
 
-export type UsersPlaylistsInterface = {
+export interface UsersPlaylistsInterface {
   items?: Playlists[];
 }
 
@@ -129,5 +134,24 @@ export type Playlists = {
   }[];
   owner?: {
     display_name: string
+  }
+}
+
+export interface EpisodesInterface {
+  items?: EpisodeWrap[];
+}
+
+export type EpisodeWrap = {
+  episode: Episode;
+}
+export type Episode = {
+  id: string,
+  description: string,
+  images?: {
+    url: string
+  }[],
+  name: string,
+  show: {
+    name: string
   }
 }

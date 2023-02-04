@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
 import { getTokenFromUrl } from '../utilities'
-import { SpotifyObj, User, SavedTracksInterface, SpotifyUserContent, ChildrenProps, TopArtistsInterface, SavedAlbumsInterface, ArtistRecommendationsInterface, CurrentTrackInterface, UsersPlaylistsInterface } from '../types'
+import { SpotifyObj, User, SavedTracksInterface, SpotifyUserContent, ChildrenProps, TopArtistsInterface, SavedAlbumsInterface, ArtistRecommendationsInterface, CurrentTrackInterface, UsersPlaylistsInterface, EpisodesInterface } from '../types'
 import SpotifyWebApi from 'spotify-web-api-js'
 
 const spotify = new SpotifyWebApi()
@@ -21,7 +21,9 @@ export const UserContext = createContext<SpotifyUserContent>({
   getCurrentTrack: () => { },
   currentTrackProg: 0,
   getUsersPlaylists: () => { },
-  usersPlaylists: {}
+  usersPlaylists: {},
+  getSeveralEpisodes: () => { },
+  episodes: {},
 })
 
 export const UserContextProvider = ({ children }: ChildrenProps) => {
@@ -33,6 +35,7 @@ export const UserContextProvider = ({ children }: ChildrenProps) => {
   const [currentTrack, setCurrentTrack] = useState<CurrentTrackInterface>({})
   const [currentTrackProg, setCurrentTrackProg] = useState<number>(0)
   const [usersPlaylists, setUsersPlaylists] = useState<UsersPlaylistsInterface>({})
+  const [episodes, setEpisodes] = useState<EpisodesInterface>({})
   const [spotifyToken, setSpotifyToken] = useState<string>("")
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
 
@@ -119,11 +122,27 @@ export const UserContextProvider = ({ children }: ChildrenProps) => {
           'Content-Type': "application/json"
         }
       })
-      let data = await results.json()
+      const data = await results.json()
       setUsersPlaylists(data)
 
     } catch (error) {
       console.error(error);
+    }
+  }
+
+  const getSeveralEpisodes = async () => {
+    try {
+      const results = await fetch('https://api.spotify.com/v1/me/episodes/', {
+        headers: {
+          'Authorization': `Bearer ${spotifyToken}`,
+          'Content-Type': "application/json"
+        }
+      })
+      const data = await results.json()
+      setEpisodes(data)
+    } catch (error) {
+      console.log(error);
+      
     }
   }
 
@@ -144,7 +163,9 @@ export const UserContextProvider = ({ children }: ChildrenProps) => {
         currentTrack,
         currentTrackProg,
         getUsersPlaylists,
-        usersPlaylists
+        usersPlaylists,
+        getSeveralEpisodes,
+        episodes
       }}>
       {children}
     </UserContext.Provider>

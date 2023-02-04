@@ -2,22 +2,23 @@ import { useState, useContext, useCallback, useEffect } from "react"
 import SectionContainerOuter from "../Common/SectionContainerOuter"
 import { UserContext } from "../../context/SpotifyUserContext"
 import PodPlayItem from "./PodPlayItem"
-import { Playlists } from "../../types"
+import { EpisodeWrap, Playlists } from "../../types"
 
 const RecentPlaylistsPods = () => {
   const [playlistSelected, setPlaylistSelected] = useState<boolean>(true)
-  const { getUsersPlaylists, usersPlaylists } = useContext(UserContext)
+  const { getUsersPlaylists, usersPlaylists, getSeveralEpisodes, episodes } = useContext(UserContext)
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   useEffect(() => {
     if (!isLoading) {
       setIsLoading(true);
       getUsersPlaylists()
+      getSeveralEpisodes()
       setIsLoading(false)
     }
   }, [isLoading])
 
-  // console.log('usersPlaylists:', usersPlaylists);
+  console.log('episodes:', episodes);
 
   return (
     <SectionContainerOuter>
@@ -32,10 +33,17 @@ const RecentPlaylistsPods = () => {
           <div className="flex flex-col w-full space-y-4 py-4">
             {playlistSelected ? (
               usersPlaylists.items?.slice(0, 4).map((playlist: Playlists) => (
-                <PodPlayItem key={playlist.id} playlist={playlist} />
+                <>
+                  <PodPlayItem key={playlist.id} content={playlist} type="playlist" />
+                </>
               ))
             ) : (
-              <p>podcasts</p>
+              episodes.items?.slice(0, 4).map((episode: EpisodeWrap) => (
+                <>
+                {/* {episode.episode.name} */}
+                  <PodPlayItem key={episode.episode.id} content={episode.episode} type="podcast"/>
+                </>
+              ))
             )}
           </div>
         </div>

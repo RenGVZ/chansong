@@ -1,5 +1,5 @@
 import NowPlaying from "./NowPlaying"
-import RecentPlaylistsPods from "./RecentPlayPods"
+import RecentPlaylistsPods from "./RecentPlaylistsPods"
 
 const PlayerSide = () => {
   return (
