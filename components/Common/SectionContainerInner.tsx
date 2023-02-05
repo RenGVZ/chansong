@@ -15,7 +15,7 @@ const SectionContainerInner = ({ children, classname, title, link }: Props) => {
         </div>
       </div>
       <div className="flex flex-col w-full items-center">
-        <div className="flex w-12/12 justify-between items-center space-x-8">
+        <div className="flex w-full justify-between items-center">
           {children}
         </div>
 
