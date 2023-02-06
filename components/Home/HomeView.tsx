@@ -2,7 +2,8 @@ import React, { useState, useContext } from 'react';
 import { UserContext } from '../../context/SpotifyUserContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import LibraryTab from './LibraryTab';
+import LibraryTab from './Tabs/LibraryTab';
+import PodcastTab from './Tabs/PodcastTab';
 import TopArtists from './TopArtists';
 import RecentAlbums from './RecentAlbums';
 import Recommendations from './Recommendations';
@@ -46,7 +47,7 @@ const HomeView = () => {
             {activeTab === 'music' ? (
               <LibraryTab />
             ) : activeTab === 'podcasts' ? (
-              <div>Podcasts</div>
+              <PodcastTab />
             ) : activeTab === 'radio' ? (
               <div>Radio</div>
             ) : activeTab === 'discover' ? (
