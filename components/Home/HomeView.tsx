@@ -7,6 +7,7 @@ import PodcastTab from './Tabs/PodcastTab';
 import TopArtists from './TopArtists';
 import RecentAlbums from './RecentAlbums';
 import Recommendations from './Recommendations';
+import RadioTab from './Tabs/RadioTab';
 
 const HomeView = () => {
   const [activeTab, setActiveTab] = useState<string>('music');
@@ -49,7 +50,7 @@ const HomeView = () => {
             ) : activeTab === 'podcasts' ? (
               <PodcastTab />
             ) : activeTab === 'radio' ? (
-              <div>Radio</div>
+              <RadioTab />
             ) : activeTab === 'discover' ? (
               <div>Discover</div>
             ) : null}
