@@ -15,11 +15,11 @@ const customFont = Just_Me_Again_Down_Here({
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <main className={customFont.className}>
-      {/* <UserContextProvider> */}
-      {/* <MainContainer> */}
-      {/* <Component {...pageProps} /> */}
-      {/* </MainContainer> */}
-      {/* </UserContextProvider> */}
+      <UserContextProvider>
+        <MainContainer>
+          <Component {...pageProps} />
+        </MainContainer>
+      </UserContextProvider>
     </main>
   );
 }
