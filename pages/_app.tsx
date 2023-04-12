@@ -1,3 +1,6 @@
+/* eslint-disable new-cap */
+/* eslint-disable camelcase */
+/* eslint-disable require-jsdoc */
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import { Just_Me_Again_Down_Here } from '@next/font/google';

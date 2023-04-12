@@ -19,10 +19,7 @@ const RecentAlbums = () => {
 
   return (
     <SectionContainerOuter>
-      <SectionContainerInner
-        classname={'recent-albums'}
-        title={'Recent Albums'}
-      >
+      <SectionContainerInner classname={'recent-albums'} title={'Recent Albums'}>
         {savedAlbums &&
           savedAlbums?.items?.slice(0, 4).map((item: SavedAlbums) => (
             <div key={item.album.id} className="flex flex-col items-center">
@@ -33,11 +30,9 @@ const RecentAlbums = () => {
                 width={150}
                 height={150}
               ></Image>
-              <h1 className="leading-none captalize text-base self-start">
-                {truncateWord(item.album.name, 26)}
-              </h1>
+              <h1 className="leading-none captalize text-base self-start">{truncateWord(item.album.name, 26)}</h1>
               <h1 className="leading-none captalize text-sm self-start">
-                {truncateWord(item.album?.artists[0].name, 26)}
+                {item.album.artists && truncateWord(item.album.artists[0].name, 26)}
               </h1>
             </div>
           ))}

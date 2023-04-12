@@ -1,7 +1,5 @@
-/* eslint-disable @next/next/no-img-element */
 import { Playlists, Episode } from '../../types';
 import { memo } from 'react';
-import { truncateWord } from '../../utilities';
 
 type Props = {
   content: Playlists | Episode;
@@ -15,20 +13,12 @@ const PodPlayItem = memo(({ content, type }: Props) => {
   return (
     <div className="flex space-x-2">
       {content && content.images && (
-        <img
-          className="w-[77px] h-[77px] rounded-[10px]"
-          src={content.images[0].url}
-          alt=""
-        />
+        <img className="w-[77px] h-[77px] rounded-[10px]" src={content.images[0].url} alt="" />
       )}
       <div className="flex flex-col">
         <h1>{content.name}</h1>
         {/* <p className=' break-words'>{content.description && truncateWord(content.description, 56)}</p> */}
-        {(type === 'playlist') ? (
-          <p>{content?.owner?.display_name}</p>
-        ) : (
-          <p>{content?.show?.name}</p>
-        )}
+        {/* {type === 'playlist' ? <p>{content?.owner?.display_name}</p> : <p>{content?.show?.name}</p>} */}
       </div>
     </div>
   );

@@ -1,0 +1,11 @@
+**/node_modules/*
+**/out/*
+**/.next/*
+/.eslintrc.js
+/package-lock.json
+/package.json
+/README.md
+/tailwind.config.js
+/next-env.d.ts
+/next.config.js
+/postcss.config.js

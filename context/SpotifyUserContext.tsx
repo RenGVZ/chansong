@@ -1,150 +1,160 @@
-import React, { createContext, useContext, useState, useEffect } from 'react'
-import { getTokenFromUrl } from '../utilities'
-import { SpotifyObj, User, SavedTracksInterface, SpotifyUserContent, ChildrenProps, TopArtistsInterface, SavedAlbumsInterface, ArtistRecommendationsInterface, CurrentTrackInterface, UsersPlaylistsInterface, EpisodesInterface } from '../types'
-import SpotifyWebApi from 'spotify-web-api-js'
+import { createContext, useState, useEffect } from 'react';
+import { getTokenFromUrl } from '../utilities';
+import {
+  SpotifyObj,
+  User,
+  SavedTracksInterface,
+  SpotifyUserContent,
+  ChildrenProps,
+  TopArtistsInterface,
+  SavedAlbumsInterface,
+  ArtistRecommendationsInterface,
+  CurrentTrackInterface,
+  UsersPlaylistsInterface,
+  EpisodesInterface,
+} from '../types';
+import SpotifyWebApi from 'spotify-web-api-js';
 
-const spotify = new SpotifyWebApi()
+const spotify = new SpotifyWebApi();
 
 export const UserContext = createContext<SpotifyUserContent>({
   // set default values
   user: {},
   isLoggedIn: false,
   savedTracks: {},
-  getSavedTracks: () => { },
+  getSavedTracks: () => {},
   topArtists: {},
-  getTopArtists: () => { },
+  getTopArtists: () => {},
   savedAlbums: {},
-  getSavedAlbums: () => { },
+  getSavedAlbums: () => {},
   artistRecommendations: {},
-  getArtistRecommendations: () => { },
+  getArtistRecommendations: () => {},
   currentTrack: {},
-  getCurrentTrack: () => { },
+  getCurrentTrack: () => {},
   currentTrackProg: 0,
-  getUsersPlaylists: () => { },
+  getUsersPlaylists: () => {},
   usersPlaylists: {},
-  getSeveralEpisodes: () => { },
+  getSeveralEpisodes: () => {},
   episodes: {},
-})
+});
 
 export const UserContextProvider = ({ children }: ChildrenProps) => {
-  const [user, setUser] = useState<User>({})
-  const [savedTracks, setSavedTracks] = useState<SavedTracksInterface>({})
-  const [topArtists, setTopArtists] = useState<TopArtistsInterface>({})
-  const [savedAlbums, setSavedAlbums] = useState<SavedAlbumsInterface>({})
-  const [artistRecommendations, setArtistRecommendations] = useState<ArtistRecommendationsInterface>({})
-  const [currentTrack, setCurrentTrack] = useState<CurrentTrackInterface>({})
-  const [currentTrackProg, setCurrentTrackProg] = useState<number>(0)
-  const [usersPlaylists, setUsersPlaylists] = useState<UsersPlaylistsInterface>({})
-  const [episodes, setEpisodes] = useState<EpisodesInterface>({})
-  const [spotifyToken, setSpotifyToken] = useState<string>("")
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
+  const [user, setUser] = useState<User>({});
+  const [savedTracks, setSavedTracks] = useState<SavedTracksInterface>({});
+  const [topArtists, setTopArtists] = useState<TopArtistsInterface>({});
+  const [savedAlbums, setSavedAlbums] = useState<SavedAlbumsInterface>({});
+  const [artistRecommendations, setArtistRecommendations] = useState<ArtistRecommendationsInterface>({});
+  const [currentTrack, setCurrentTrack] = useState<CurrentTrackInterface>({});
+  const [currentTrackProg, setCurrentTrackProg] = useState<number>(0);
+  const [usersPlaylists, setUsersPlaylists] = useState<UsersPlaylistsInterface>({});
+  const [episodes, setEpisodes] = useState<EpisodesInterface>({});
+  const [spotifyToken, setSpotifyToken] = useState<string>('');
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
   useEffect(() => {
     const _spotifyObject: SpotifyObj = getTokenFromUrl();
-    window.location.hash = "";
+    window.location.hash = '';
 
     if (_spotifyObject.access_token) {
-      setSpotifyToken(_spotifyObject.access_token)
+      setSpotifyToken(_spotifyObject.access_token);
 
-      spotify.setAccessToken(_spotifyObject.access_token)
+      spotify.setAccessToken(_spotifyObject.access_token);
 
-      spotify.getMe().then((user) => {
-        const userData: User = user
-        setUser(userData)
-      })
+      spotify.getMe().then(user => {
+        const userData: User = user;
+        setUser(userData);
+      });
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     // console.log('user info:', user);
-    (Object.keys(user).length !== 0) ? setIsLoggedIn(true) : setIsLoggedIn(false)
-  }, [user])
+    Object.keys(user).length !== 0 ? setIsLoggedIn(true) : setIsLoggedIn(false);
+  }, [user]);
 
   const getSavedTracks = () => {
-    let tracks: SavedTracksInterface = {}
-    spotify.getMySavedTracks().then((data) => {
+    let tracks: SavedTracksInterface = {};
+    spotify.getMySavedTracks().then(data => {
       if (data && data.items) {
-        tracks = data
-        setSavedTracks(tracks)
+        tracks = data;
+        setSavedTracks(tracks);
       }
-    })
-  }
+    });
+  };
 
   const getTopArtists = () => {
-    spotify.getMyTopArtists().then((data) => {
-      setTopArtists(data)
-    })
-  }
+    spotify.getMyTopArtists().then(data => {
+      setTopArtists(data);
+    });
+  };
 
   const getSavedAlbums = () => {
-    spotify.getMySavedAlbums().then((data) => {
-      setSavedAlbums(data)
-    })
-  }
+    spotify.getMySavedAlbums().then(data => {
+      setSavedAlbums(data);
+    });
+  };
 
   const getArtistRecommendations = () => {
     // console.log('top artists:', topArtists);
-    var seeds = {
+    const seeds = {
       // seed_tracks: savedTracks.items?.splice(0, 5).map((song) => song.track.id),
-      seed_artists: topArtists.items?.splice(0, 5).map((artist) => artist.id),
+      seed_artists: topArtists.items?.splice(0, 5).map(artist => artist.id),
       // seed_genres: [
       //   "classical,country"
       // ],
     };
-    spotify.getRecommendations(seeds).then((data) => {
+    spotify.getRecommendations(seeds).then(data => {
       setArtistRecommendations(data);
-    })
-  }
+    });
+  };
 
   const getCurrentTrack = async () => {
-    let data = null
+    let data = null;
     try {
       const result = await fetch('https://api.spotify.com/v1/me/player/currently-playing', {
         headers: {
-          'Authorization': `Bearer ${spotifyToken}`,
-          'Content-Type': 'application/json'
-        }
-      })
-      data = await result.json()
+          Authorization: `Bearer ${spotifyToken}`,
+          'Content-Type': 'application/json',
+        },
+      });
+      data = await result.json();
       // console.log('currentTrack data:', data);
-      setCurrentTrackProg(data?.progress_ms)
-      setCurrentTrack(data?.item)
+      setCurrentTrackProg(data?.progress_ms);
+      setCurrentTrack(data?.item);
     } catch (err) {
-      console.error(err)
+      console.error(err);
     }
-  }
+  };
 
   const getUsersPlaylists = async () => {
     try {
       const results = await fetch('https://api.spotify.com/v1/me/playlists', {
         headers: {
-          'Authorization': `Bearer ${spotifyToken}`,
-          'Content-Type': "application/json"
-        }
-      })
-      const data = await results.json()
-      setUsersPlaylists(data)
-
+          Authorization: `Bearer ${spotifyToken}`,
+          'Content-Type': 'application/json',
+        },
+      });
+      const data = await results.json();
+      setUsersPlaylists(data);
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   const getSeveralEpisodes = async () => {
     try {
       const results = await fetch('https://api.spotify.com/v1/me/episodes/', {
         headers: {
-          'Authorization': `Bearer ${spotifyToken}`,
-          'Content-Type': "application/json"
-        }
-      })
-      const data = await results.json()
-      setEpisodes(data)
+          Authorization: `Bearer ${spotifyToken}`,
+          'Content-Type': 'application/json',
+        },
+      });
+      const data = await results.json();
+      setEpisodes(data);
     } catch (error) {
       console.log(error);
-      
     }
-  }
+  };
 
   return (
     <UserContext.Provider
@@ -165,9 +175,10 @@ export const UserContextProvider = ({ children }: ChildrenProps) => {
         getUsersPlaylists,
         usersPlaylists,
         getSeveralEpisodes,
-        episodes
-      }}>
+        episodes,
+      }}
+    >
       {children}
     </UserContext.Provider>
-  )
-}
+  );
+};

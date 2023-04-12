@@ -32,12 +32,8 @@ const TopArtists = memo(() => {
                 width={150}
                 height={150}
               ></Image>
-              <h1 className="leading-none captalize text-base self-start">
-                {artist.name}
-              </h1>
-              <h1 className="leading-none captalize text-sm self-start">
-                {artist.type}
-              </h1>
+              <h1 className="leading-none captalize text-base self-start">{artist.name}</h1>
+              <h1 className="leading-none captalize text-sm self-start">{artist.type}</h1>
             </div>
           ))}
       </SectionContainerInner>

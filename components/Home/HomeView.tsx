@@ -20,10 +20,7 @@ const HomeView = () => {
     <div className="flex flex-col w-full justify-center items-center">
       <div className="w-[88%] flex flex-col items-start pt-10 space-y-6">
         <div className="w-full flex items-center shadow-cust rounded-full p-4">
-          <FontAwesomeIcon
-            icon={faMagnifyingGlass}
-            className="text-sm text-mid px-2"
-          />
+          <FontAwesomeIcon icon={faMagnifyingGlass} className="text-sm text-mid px-2" />
           <p className="text-dark text-sm">Search</p>
         </div>
         <div className="tab-area w-full flex flex-col space-y-4">
@@ -31,14 +28,8 @@ const HomeView = () => {
             {tabs.map((tab, i) => (
               <li
                 key={i}
-                className={
-                  tab == activeTab
-                    ? 'underline capitalize cursor-pointer'
-                    : 'capitalize cursor-pointer'
-                }
-                onClick={(event: React.MouseEvent<HTMLElement>) =>
-                  setActiveTab(tab)
-                }
+                className={tab == activeTab ? 'underline capitalize cursor-pointer' : 'capitalize cursor-pointer'}
+                onClick={(event: React.MouseEvent<HTMLElement>) => setActiveTab(tab)}
               >
                 {tab}
               </li>

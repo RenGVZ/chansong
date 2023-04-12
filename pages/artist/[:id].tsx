@@ -1,9 +1,5 @@
-import React from 'react'
-
 const Artist = () => {
-  return (
-    <div>artist</div>
-  )
-}
+  return <div>artist</div>;
+};
 
-export default Artist
+export default Artist;

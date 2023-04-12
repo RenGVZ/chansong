@@ -1,5 +1,5 @@
-import NowPlaying from "./NowPlaying"
-import RecentPlaylistsPods from "./RecentPlaylistsPods"
+import NowPlaying from './NowPlaying';
+import RecentPlaylistsPods from './RecentPlaylistsPods';
 
 const PlayerSide = () => {
   return (
@@ -9,7 +9,7 @@ const PlayerSide = () => {
         <RecentPlaylistsPods />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default PlayerSide
+export default PlayerSide;

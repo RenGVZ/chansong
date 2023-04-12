@@ -1,44 +1,42 @@
-import { type } from "os"
-
 export interface SpotifyObj {
-  access_token?: string
+  access_token?: string;
 }
 
 export type ChildrenProps = {
-  children?: React.ReactNode
-}
+  children?: React.ReactNode;
+};
 
 export type SpotifyUserContent = {
-  user: User,
-  isLoggedIn: boolean,
-  savedTracks: SavedTracksInterface,
-  getSavedTracks: () => void,
+  user: User;
+  isLoggedIn: boolean;
+  savedTracks: SavedTracksInterface;
+  getSavedTracks: () => void;
 
-  topArtists: TopArtistsInterface,
-  getTopArtists: () => void,
+  topArtists: TopArtistsInterface;
+  getTopArtists: () => void;
 
-  savedAlbums: SavedAlbumsInterface,
-  getSavedAlbums: () => void,
+  savedAlbums: SavedAlbumsInterface;
+  getSavedAlbums: () => void;
 
-  artistRecommendations: ArtistRecommendationsInterface,
-  getArtistRecommendations: () => void,
+  artistRecommendations: ArtistRecommendationsInterface;
+  getArtistRecommendations: () => void;
 
-  currentTrack: CurrentTrackInterface,
-  getCurrentTrack: () => void,
+  currentTrack: CurrentTrackInterface;
+  getCurrentTrack: () => void;
 
-  currentTrackProg: number,
-  usersPlaylists: UsersPlaylistsInterface,
-  getUsersPlaylists: () => void,
+  currentTrackProg: number;
+  usersPlaylists: UsersPlaylistsInterface;
+  getUsersPlaylists: () => void;
 
-  getSeveralEpisodes: () => void,
-  episodes: EpisodesInterface
-}
+  getSeveralEpisodes: () => void;
+  episodes: EpisodesInterface;
+};
 
 export type Artist = {
   id: string;
   name: string;
   type: string;
-}
+};
 
 export type Album = {
   id: string;
@@ -49,7 +47,7 @@ export type Album = {
   images: {
     url: string;
   }[];
-}
+};
 
 export interface User {
   country?: string;
@@ -77,7 +75,7 @@ export type SavedTracks = {
     duration_ms: number;
     album: Album;
   };
-}
+};
 
 export interface TopArtistsInterface {
   items?: TopArtists[];
@@ -90,7 +88,7 @@ export type TopArtists = {
   images: {
     url: string;
   }[];
-}
+};
 
 export interface SavedAlbumsInterface {
   items?: SavedAlbums[];
@@ -98,7 +96,7 @@ export interface SavedAlbumsInterface {
 
 export type SavedAlbums = {
   album: Album;
-}
+};
 
 export interface ArtistRecommendationsInterface {
   tracks?: Recommendations[];
@@ -111,7 +109,7 @@ export type Recommendations = {
   artists: {
     name: string;
   }[];
-}
+};
 
 export interface CurrentTrackInterface {
   id?: string;
@@ -133,9 +131,9 @@ export type Playlists = {
     url: string;
   }[];
   owner?: {
-    display_name: string
-  }
-}
+    display_name: string;
+  };
+};
 
 export interface EpisodesInterface {
   items?: EpisodeWrap[];
@@ -143,15 +141,15 @@ export interface EpisodesInterface {
 
 export type EpisodeWrap = {
   episode: Episode;
-}
+};
 export type Episode = {
-  id: string,
-  description: string,
+  id: string;
+  description: string;
   images?: {
-    url: string
-  }[],
-  name: string,
+    url: string;
+  }[];
+  name: string;
   show: {
-    name: string
-  }
-}
+    name: string;
+  };
+};

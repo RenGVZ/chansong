@@ -1,11 +1,11 @@
-import { useContext, useEffect, useCallback } from 'react';
+import { useContext } from 'react';
 import Image from 'next/image';
 import { UserContext } from '../../../context/SpotifyUserContext';
 import { EpisodeWrap } from '../../../types';
 import SectionContainer from '../../Common/SectionContainerOuter';
 
 const PodcastTab = () => {
-  const { getSeveralEpisodes, episodes } = useContext(UserContext);
+  const { episodes } = useContext(UserContext);
 
   // const getEpisodesCallback = useCallback(() => {
   //   getSeveralEpisodes();
@@ -35,10 +35,7 @@ const PodcastTab = () => {
       <div className="tracks flex flex-col space-y-3">
         {episodes &&
           episodes?.items?.slice(0, 5).map((item: EpisodeWrap, i) => (
-            <div
-              key={item?.episode.id}
-              className="flex items-center justify-between"
-            >
+            <div key={item?.episode.id} className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
                 {item.episode.images && item.episode.images.length > 0 && (
                   <Image
@@ -50,9 +47,7 @@ const PodcastTab = () => {
                   ></Image>
                 )}
                 <div className="flex flex-col">
-                  <p className="text-lg leading-none">
-                    {item.episode.show.name}
-                  </p>
+                  <p className="text-lg leading-none">{item.episode.show.name}</p>
                   <p className="text-sm leading-none">{item.episode.name}</p>
                 </div>
               </div>
