@@ -17,7 +17,7 @@ const TopArtists = memo(() => {
     getTopArtistsCallback();
   }, [getTopArtistsCallback]);
 
-  console.log('TopArtists component is rendering');
+  // console.log('TopArtists component is rendering');
 
   return (
     <SectionContainerOuter>

@@ -8,7 +8,7 @@ type Props = {
 
 // eslint-disable-next-line react/display-name
 const PodPlayItem = memo(({ content, type }: Props) => {
-  console.log('content:', content);
+  // console.log('content:', content);
 
   return (
     <div className="flex space-x-2">
