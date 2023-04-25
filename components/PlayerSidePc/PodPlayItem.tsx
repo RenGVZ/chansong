@@ -1,5 +1,6 @@
 import { Playlists, Episode } from '../../types';
 import { memo } from 'react';
+import { truncateWord } from '../../utilities';
 
 type Props = {
   content: Playlists | Episode;
@@ -17,7 +18,7 @@ const PodPlayItem = memo(({ content, type }: Props) => {
       )}
       <div className="flex flex-col">
         <h1>{content.name}</h1>
-        {/* <p className=' break-words'>{content.description && truncateWord(content.description, 56)}</p> */}
+        <p className=" break-words">{content.description && truncateWord(content.description, 56)}</p>
         {/* {type === 'playlist' ? <p>{content?.owner?.display_name}</p> : <p>{content?.show?.name}</p>} */}
       </div>
     </div>
