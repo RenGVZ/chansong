@@ -1,3 +1,4 @@
+'use client';
 import React, { useState, useContext } from 'react';
 import { UserContext } from '../../context/SpotifyUserContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

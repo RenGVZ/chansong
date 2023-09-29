@@ -1,4 +1,4 @@
-import { authEndpoint, redirectUri } from '../pages/api/endpoints';
+import { authEndpoint, redirectUri } from '../api/endpoints';
 import { scopes } from '../utilities';
 
 const LoginView = () => {

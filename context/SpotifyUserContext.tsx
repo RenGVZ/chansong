@@ -1,3 +1,4 @@
+'use client';
 import { createContext, useState, useEffect } from 'react';
 import { getTokenFromUrl } from '../utilities';
 import {
