@@ -1,14 +1,14 @@
 'use client';
 import React, { useState, useContext } from 'react';
-import { UserContext } from '../../context/SpotifyUserContext';
+import { UserContext } from '@context/SpotifyUserContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import LibraryTab from './Tabs/LibraryTab';
-import PodcastTab from './Tabs/PodcastTab';
-import TopArtists from './TopArtists';
-import RecentAlbums from './RecentAlbums';
-import Recommendations from './Recommendations';
-import RadioTab from './Tabs/RadioTab';
+import LibraryTab from '@components/Home/Tabs/LibraryTab';
+import PodcastTab from '@components/Home/Tabs/PodcastTab';
+import TopArtists from '@components/Home/TopArtists';
+import RecentAlbums from '@components/Home/RecentAlbums';
+import Recommendations from '@components/Home/Recommendations';
+import RadioTab from '@components/Home/Tabs/RadioTab';
 
 const HomeView = () => {
   const [activeTab, setActiveTab] = useState<string>('music');
