@@ -1,3 +1,4 @@
+'use client';
 import { useContext, useCallback, useEffect } from 'react';
 import { UserContext } from '../../context/SpotifyUserContext';
 import SectionContainerOuter from '../Common/SectionContainerOuter';

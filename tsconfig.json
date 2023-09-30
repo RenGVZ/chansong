@@ -20,8 +20,18 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "sourceMap": true,
-    "incremental": true
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "baseUrl": "./",
+    "paths": {
+      "@components/*": ["components/*"],
+      "@context/*": ["context/*"]
+    }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/index.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/index.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
 }

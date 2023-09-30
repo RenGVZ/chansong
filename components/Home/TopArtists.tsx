@@ -21,7 +21,7 @@ const TopArtists = memo(() => {
 
   return (
     <SectionContainerOuter>
-      <SectionContainerInner classname={'top-artists'} title={'Top Artists'}>
+      <SectionContainerInner classname={'top-artists'} title={'Top Artists'} link="artist">
         {topArtists &&
           topArtists?.items?.slice(0, 4).map((artist: TopArtists) => (
             <div key={artist.id} className="flex flex-col items-center">

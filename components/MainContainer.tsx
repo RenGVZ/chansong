@@ -1,3 +1,5 @@
+'use client';
+import Link from 'next/link';
 import { useContext } from 'react';
 import { UserContext } from '../context/SpotifyUserContext';
 import { ChildrenProps } from '../types';
@@ -10,6 +12,7 @@ const MainContainer = ({ children }: ChildrenProps) => {
 
   return (
     <>
+      <Link href="test">Test Link</Link>
       {!isLoggedIn ? (
         <LoginView />
       ) : (

@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 type Props = {
   children?: React.ReactNode;
   classname?: string;
@@ -11,9 +13,9 @@ const SectionContainerInner = ({ children, classname, title, link }: Props) => {
       <div className={`${classname} flex w-full justify-between items-center`}>
         <h1 className="text-lg uppercase pl-3">{title}</h1>
         <div className="flex flex-row items-baseline space-x-4 pr-4">
-          <a href={link} className="text-dark cursor-pointer">
+          <Link href={link ?? '#'} className="text-dark cursor-pointer">
             See More
-          </a>
+          </Link>
         </div>
       </div>
       <div className="flex flex-col w-full items-center">

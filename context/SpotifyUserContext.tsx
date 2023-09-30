@@ -1,3 +1,4 @@
+'use client';
 import { createContext, useState, useEffect } from 'react';
 import { getTokenFromUrl } from '../utilities';
 import {
@@ -56,6 +57,7 @@ export const UserContextProvider = ({ children }: ChildrenProps) => {
     window.location.hash = '';
 
     if (_spotifyObject.access_token) {
+      localStorage.setItem('token', _spotifyObject.access_token);
       setSpotifyToken(_spotifyObject.access_token);
 
       spotify.setAccessToken(_spotifyObject.access_token);
